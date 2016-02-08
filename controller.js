@@ -1,9 +1,9 @@
 /* global Firebase */
-app.controller('InputController', function ($scope, FBREF) {
+app.controller('InputController', function ($scope, FBREF, $firebaseArray) {
 
     var db = new Firebase(FBREF);
     console.log("What is FB obj?", db)
-
+    $scope.itemList = $firebaseArray(new Firebase(FBREF + 'items'))
     $scope.test = "testy";
 
     function handleDBResponse(err, authData) {
@@ -18,8 +18,13 @@ app.controller('InputController', function ($scope, FBREF) {
             reputation: 0,
             created: Date.now()
         }
+        //This makes the login form disapear without clicking input field again//workaround for ng-show/hide issue
+        $scope.$apply(function(){
+            $scope.member = userToSave;
+        })
+        
         //This line saves user to DB
-        db.child('users').child(authData.uid).update(userToSave)
+        db.child('users').child(authData.uid).update(userToSave);
     }
     
     $scope.register = function(user){
@@ -29,10 +34,21 @@ app.controller('InputController', function ($scope, FBREF) {
     // db is responsible for authentication
     // after user is authenticated db will send back either error or auth data
     //We want authData.uid
+    
     $scope.login = function(user){
     db.authWithPassword(user, handleDBResponse)
     }
-
-
+    
+   // $scope.itemList = [];
+    $scope.newItem = function(){
+        if(!$scope.addItem){
+            return
+        }
+        $scope.itemList.push($scope.addItem);
+        $scope.addItem = '';
+    }
+    $scope.remove = function(i){
+        $scope.itemList.splice(i,1)
+    }
 
 })

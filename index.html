@@ -1,13 +1,14 @@
-<html ng-app="myapp">
+<html ng-app="myapp" >
 
 <head>
     <meta charset="UTF-8">
     <title>Login Form</title>
 </head>
 
-<body ng-controller="InputController">
+<body ng-controller="InputController" >
     {{2+2}}
-    <form ng-submit="submitForm(user)">
+    <!--ng-show="!member" could be user to show/hide form-->
+    <form ng-submit="submitForm(user)" ng-show="!member">
         <div class="form-group">
             <label>Email</label>
             <input type="email" ng-model="user.email" placeholder="email">
@@ -15,15 +16,24 @@
 
         <div class="form-group">
             <label>Password</label>
-            <input type="text" ng-model="user.password" placeholder="password">
+            <input type="password" ng-model="user.password" placeholder="password">
             <button ng-click="submitForm = login">Login</button>
             <button ng-click="submitForm = register">Register</button>
         </div>
     </form>
+    <h2 ng-show="member">Welcome, {{member.username}}</h2>
+    <h3>ItemList</h3>
+   <ul>
+       <li ng-repeat="item in itemList track by $index">{{item}}<a ng-click="remove($index)">-(x)</a></li>
+   </ul>
+   <input type="text" placeholder="newItem" ng-model="addItem">
+   <button ng-click="newItem()">Enter</button>
     <!--Angular-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <!--Firebase-->
     <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+    <!--Angular Fire-->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
     <!--App-->
     <script src="app.js"></script>
     <script src="controller.js"></script>
