@@ -7,15 +7,24 @@
 
 <body ng-controller="InputController">
     {{2+2}}
-    <form ng-submit="login()">
-       
-        <label>Email</label>
-        <input type="email" ng-model="email" placeholder="email">
-         <label>Password</label>
-        <input type="text" ng-model="name" placeholder="password">
-        <button >Login</button>
+    <form ng-submit="submitForm(user)">
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" ng-model="user.email" placeholder="email">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" ng-model="user.password" placeholder="password">
+            <button ng-click="submitForm = login">Login</button>
+            <button ng-click="submitForm = register">Register</button>
+        </div>
     </form>
+    <!--Angular-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <!--Firebase-->
+    <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+    <!--App-->
     <script src="app.js"></script>
     <script src="controller.js"></script>
 </body>
