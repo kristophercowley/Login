@@ -1,0 +1,23 @@
+<html ng-app="myapp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+</head>
+
+<body ng-controller="InputController">
+    {{2+2}}
+    <form ng-submit="login()">
+       
+        <label>Email</label>
+        <input type="email" ng-model="email" placeholder="email">
+         <label>Password</label>
+        <input type="text" ng-model="name" placeholder="password">
+        <button >Login</button>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="controller.js"></script>
+</body>
+
+</html>
