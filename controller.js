@@ -12,7 +12,14 @@ app.controller('InputController', function ($scope, FBREF) {
             console.log(err)
             return;
         }
-        console.log(authData)
+        console.log(authData);
+        var userToSave = {
+            username: $scope.user.email,
+            reputation: 0,
+            created: Date.now()
+        }
+        //This line saves user to DB
+        db.child('users').child(authData.uid).update(userToSave)
     }
     
     $scope.register = function(user){
